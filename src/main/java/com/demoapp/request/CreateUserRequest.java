@@ -1,4 +1,4 @@
-package com.demoapp.response;
+package com.demoapp.request;
 
 public class CreateUserRequest {
 
