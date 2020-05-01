@@ -23,11 +23,11 @@ public class UserDocs extends AbstractEntity<Long> implements Serializable {
 	private UserDocType docType;
 	
     @Lob
-    @Column(name = "front_imahe", columnDefinition="BLOB")
+    @Column(name = "front_image")
     private byte[] frontImage;
     
     @Lob
-    @Column(name = "back_imahe", columnDefinition="BLOB")
+    @Column(name = "back_image")
     private byte[] backImage;
 
 	public UserDocType getDocType() {
