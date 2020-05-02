@@ -28,7 +28,12 @@ public class UserService {
 	}
 
 	public User convertToUser(CreateUserRequest request) {
-		return new User();
+		User user = new User();
+		user.setName(request.getName());
+		user.setPhoneNo(request.getPhoneNo());
+		user.setEmail(request.getEmail());
+		user.setPassword(request.getPassword());
+		return user;
 
 	}
 

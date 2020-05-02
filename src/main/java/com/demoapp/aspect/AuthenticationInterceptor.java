@@ -12,10 +12,11 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.mvc.WebContentInterceptor;
 
 @Aspect
 @Component
-public class AuthenticationInterceptor {
+public class AuthenticationInterceptor extends WebContentInterceptor{
 	
 	@Pointcut("@annotation(com.demoapp.annotation.Authenticated)")
     public void authentication() {
@@ -24,10 +25,9 @@ public class AuthenticationInterceptor {
 	@Around("authentication()")
 	public Object authenticate(ProceedingJoinPoint jointPoint) throws Throwable {
 		
-		System.out.println("authenticating");
-
 		MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
 		Method method = methodSignature.getMethod();
+		
 		if (null != method) {
 			HttpServletRequest httprequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 					.getRequest();
