@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.demoapp.constant.LoginBy;
 import com.demoapp.entity.User;
 import com.demoapp.entity.repo.UserRepo;
 import com.demoapp.request.CreateUserRequest;
@@ -20,10 +21,7 @@ public class UserService {
 
 	public CreateUserResponse createUserRequest(CreateUserRequest request) {
 
-		return Optional.of(request)
-				.map(this::convertToUser)
-				.map(userRepo::save)
-				.map(CreateUserResponse::of)
+		return Optional.of(request).map(this::convertToUser).map(userRepo::save).map(CreateUserResponse::of)
 				.orElse(null);
 	}
 
@@ -38,9 +36,19 @@ public class UserService {
 	}
 
 	public UserLoginResponse login(UserLoginRequest request) {
-		return null;
-	}
+        
+		User user = null;
+		if (request.getLoginBy().equals(LoginBy.Email)) {
+			user =userRepo.findByEmail(request.getEmailOrPhoneNo());
+		} else {
+			user =userRepo.findByPhoneNo(request.getEmailOrPhoneNo());
 
-	
+		}
+		
+		if(user != null && user.getPassword().contentEquals(request.getPassword())) {
+			return new UserLoginResponse("sdsdsd");
+		}
+		throw new RuntimeException("Please enter correct password");
+	}
 
 }
