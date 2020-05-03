@@ -9,7 +9,7 @@ import com.demoapp.annotation.Authenticated;
 public class TestController {
 	
 	@GetMapping("test")
-	@Authenticated
+	@Authenticated(roleRequired = true)
 	public String test() {
 		return "success";
 	}

@@ -14,6 +14,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
 
+import com.demoapp.annotation.Authenticated;
+
 @Aspect
 @Component
 public class AuthenticationInterceptor extends WebContentInterceptor{
@@ -27,6 +29,9 @@ public class AuthenticationInterceptor extends WebContentInterceptor{
 		
 		MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
 		Method method = methodSignature.getMethod();
+		
+		Authenticated authenticated =method.getAnnotation(Authenticated.class);
+		System.out.println("role required"+authenticated.roleRequired());
 		
 		if (null != method) {
 			HttpServletRequest httprequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
