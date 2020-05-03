@@ -12,6 +12,7 @@ import com.demoapp.request.CreateUserRequest;
 import com.demoapp.request.UserLoginRequest;
 import com.demoapp.response.CreateUserResponse;
 import com.demoapp.response.UserLoginResponse;
+import com.demoapp.util.TokenUtil;
 
 @Service
 public class UserService {
@@ -46,6 +47,8 @@ public class UserService {
 		}
 		
 		if(user != null && user.getPassword().contentEquals(request.getPassword())) {
+			
+			String token = TokenUtil.generateToken();
 			return new UserLoginResponse("sdsdsd");
 		}
 		throw new RuntimeException("Please enter correct password");
