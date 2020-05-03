@@ -10,6 +10,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
@@ -31,11 +33,14 @@ public class AuthenticationInterceptor extends WebContentInterceptor{
 		Method method = methodSignature.getMethod();
 		
 		Authenticated authenticated =method.getAnnotation(Authenticated.class);
-		System.out.println("role required"+authenticated.roleRequired());
+		
 		
 		if (null != method) {
 			HttpServletRequest httprequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 					.getRequest();
+			
+			String uri =httprequest.getRequestURI();
+			System.out.println("Uri "+uri);
 			if (null != httprequest) {
 				String token = httprequest.getHeader("token");
 				if (token == null) {
