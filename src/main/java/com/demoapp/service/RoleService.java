@@ -34,7 +34,7 @@ public class RoleService {
 		for(String url:request.getAllowedUrls()) {
 			Role role = new Role();
 			role.setServiceName("web");
-			role.setRole(role.getRole());
+			role.setRole(request.getRole());
 			role.setUrl(url);
 			roleRepo.save(role);
 		}
