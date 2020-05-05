@@ -11,5 +11,7 @@ import com.demoapp.entity.Role;
 public interface RoleRepo extends JpaRepository<Role,Long>{
 
 	List<Role> findByRoleIn(List<String> roles);
+	
+	List<Role> findByRole(String roles);
 
 }

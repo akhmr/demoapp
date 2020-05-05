@@ -96,10 +96,10 @@ public class UserService {
 		User user= userRepo.findByCode(userToken.getUsercode());
 		
 		UserDto userDto = new UserDto();
-		userDto.setEmail(userDto.getEmail());
-		userDto.setPhoneNo(userDto.getPhoneNo());
-		userDto.setCode(userDto.getCode());
-		userDto.setName(userDto.getName());
+		userDto.setEmail(user.getEmail());
+		userDto.setPhoneNo(user.getPhoneNo());
+		userDto.setCode(user.getCode());
+		userDto.setName(user.getName());
 		return userDto;
 		
 	}
